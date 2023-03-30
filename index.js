@@ -19,8 +19,9 @@ const todols = document.getElementById("todolist");
 const inpt = document.querySelector('input[type="text"]');
 let alltodos = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = JSON.parse(localStorage.getItem("all_todos"));
-if (alltodos === null) {
+if (totaltodos === null) {
   alltodos = [];
+  totaltodos = [];
 }
 
 const toggleSwitch = document.querySelector(
