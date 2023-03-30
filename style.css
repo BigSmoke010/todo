@@ -96,7 +96,8 @@ input:checked + .slider:before {
   position: sticky;
   top: 0;
   background-color: transparent;
-  backdrop-filter: blur(2px);
+  z-index: 1;
+  backdrop-filter: blur(5px);
 }
 .sep {
   width: 400px;
