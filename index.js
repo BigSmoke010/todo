@@ -10,7 +10,8 @@ xhr.onload = function () {
 };
 xhr.send();
 let checkbox = document.getElementsByClassName("checkbox");
-const dateel = document.querySelector('input[type="datetime-local"]');
+const dateel = document.querySelector('input[type="date"]');
+const timeel = document.querySelector('input[type="time"]');
 const toggleSwitch = document.querySelector(
   '.theme-switch input[type="checkbox"]'
 );
@@ -139,10 +140,20 @@ function checklistener() {
 
 render(divsToBeAdded);
 submitbutton.addEventListener("click", function () {
-  totaltodos.push([inpt.value, dateel.value, "unchecked"]);
-  divsToBeAdded.push([inpt.value, dateel.value, "unchecked"]);
-  console.log(totaltodos);
-  localStorage.setItem("all_todos", JSON.stringify(totaltodos));
-  render(divsToBeAdded);
+  if (inpt.value) {
+    totaltodos.push([
+      inpt.value,
+      dateel.value + " " + timeel.value,
+      "unchecked",
+    ]);
+    divsToBeAdded.push([
+      inpt.value,
+      dateel.value + " " + timeel.value,
+      "unchecked",
+    ]);
+    inpt.value = "";
+    localStorage.setItem("all_todos", JSON.stringify(totaltodos));
+    render(divsToBeAdded);
+  }
 });
 switcher.addEventListener("click", switchTheme);

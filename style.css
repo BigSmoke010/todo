@@ -104,6 +104,14 @@ body {
   border: 2px var(--BTN-BORDER-COLOR) solid;
   border-radius: 5px;
 }
+.time-inpt {
+  font-family: "Open Sans";
+  background-color: var(--MAIN-BG-COLOR);
+  color: var(--FONTC);
+  border: 2px var(--BTN-BORDER-COLOR) solid;
+  border-radius: 5px;
+}
+
 ::-webkit-calendar-picker-indicator {
   filter: invert(var(--INVERTEDICONS));
 }
