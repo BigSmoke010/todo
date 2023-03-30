@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --FONTC: black;
+  --OPFONTC: white;
+  --INPUT-BG-COLOR: white;
+  --BTN-BORDER-COLOR: black;
+  --MAIN-BG-COLOR: white;
+  --BTN-CLR: black;
+  --HOVERCLR: grey;
+  --INVERTEDICONS: 0;
+}
+[data-theme="dark"] {
+  --FONTC: white;
+  --OPFONTC: black;
+  --INPUT-BG-COLOR: rgb(0, 0, 0);
+  --BTN-BORDER-COLOR: white;
+  --MAIN-BG-COLOR: rgb(10, 10, 10);
+  --BTN-CLR: white;
+  --HOVERCLR: rgb(0, 255, 255);
+  --INVERTEDICONS: 1;
+}
+
+body {
+  background-color: var(--MAIN-BG-COLOR);
+  font-family: "Open Sans";
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+/*Simple css to style it like a toggle switch*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: 0.4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.main {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+}
+.sep {
+  width: 400px;
+  height: 2px;
+  background-color: var(--FONTC);
+}
+.inpt {
+  border: none;
+  background-color: var(--INPUT-BG-COLOR);
+  width: 300px;
+  height: 32px;
+  border-radius: 10px;
+  margin-top: 10px;
+  border: 1px var(--BTN-BORDER-COLOR) solid;
+  font-size: 20px;
+  padding: 5px;
+  transition: box-shadow 0.5s ease;
+  color: var(--FONTC);
+}
+.date-inpt {
+  font-family: "Open Sans";
+  background-color: var(--MAIN-BG-COLOR);
+  color: var(--FONTC);
+  border: 2px var(--BTN-BORDER-COLOR) solid;
+  border-radius: 5px;
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(var(--INVERTEDICONS));
+}
+.newbtn {
+  display: inline-block;
+
+  font: normal normal 300 1.3em "Open Sans";
+  text-decoration: none;
+
+  color: var(--BTN-CLR);
+  background-color: transparent;
+  border: 1px solid var(--BTN-CLR);
+  border-radius: 100px;
+
+  padding: 0.3em 1.2em;
+  margin: 10px;
+
+  background-size: 200% 100%;
+  background-image: linear-gradient(
+    to right,
+    transparent 50%,
+    var(--BTN-CLR) 50%
+  );
+  transition: background-position 0.3s cubic-bezier(0.19, 1, 0.22, 1) 0.1s,
+    color 0.5s ease 0s, background-color 0.5s ease, box-shadow 1s ease;
+}
+.newbtn:hover {
+  cursor: pointer;
+  color: var(--OPFONTC);
+  background-color: var(--BTN-CLR);
+  background-position: -100% 100%;
+  box-shadow: 0 0 10px 1px var(--FONTC);
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 97vw;
+  border: 1px solid var(--FONTC);
+  border-radius: 15px;
+  padding: 10px;
+}
+.todos {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+.todopar {
+  flex-grow: 1;
+  font-size: 20px;
+  color: var(--FONTC);
+}
+.date {
+  font-size: 12px;
+  color: var(--FONTC);
+}
+.trash {
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 5px;
+  transition: background-color 0.25s;
+  filter: invert(var(--INVERTEDICONS));
+}
+.trash:hover {
+  background-color: var(--HOVERCLR);
+}
+.checkbox {
+  min-width: 50px;
+  min-height: 50px;
+  flex-shrink: 1;
+  border: 2px var(--FONTC) solid;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color 0.5s, box-shadow 0.5s;
+}
+.filledcheck {
+  background-color: var(--BTN-CLR);
+  box-shadow: 0 0 10px 1px var(--FONTC);
+}
+.unfilledcheck {
+  box-shadow: none;
+}
+.checkbox:hover {
+  cursor: pointer;
+  box-shadow: 0 0 10px 1px var(--FONTC);
+}
+.line1 {
+  background-color: var(--FONTC);
+  width: 48px;
+  height: 5px;
+  transform: translateY(20px) rotate(50deg);
+  transition: all 1s;
+}
+.line2 {
+  background-color: var(--FONTC);
+  width: 48px;
+  height: 5px;
+  transform: translateY(15px) rotate(-50deg);
+  transition: all 1s;
+}
+.animationclass1 {
+  animation: check1 1s forwards ease;
+}
+.animationclass2 {
+  animation: check2 1s forwards ease;
+}
+.animationclass1r {
+  animation: check1r 1s forwards ease;
+}
+.animationclass2r {
+  animation: check2r 1s forwards ease;
+}
+@keyframes check1 {
+  from {
+    width: 48px;
+    height: 5px;
+    transform: translateY(20px) rotate(50deg);
+  }
+  to {
+    width: 30px;
+    transform: translate(-5px, 25px) rotate(50deg);
+    border-radius: 10px;
+    background-color: var(--OPFONTC);
+  }
+}
+@keyframes check2 {
+  from {
+    width: 48px;
+    height: 5px;
+    transform: translateY(15px) rotate(-50deg);
+  }
+  to {
+    width: 40px;
+    transform: translate(11px, 15px) rotate(-50deg);
+    border-radius: 10px;
+    background-color: var(--OPFONTC);
+  }
+}
+@keyframes check1r {
+  from {
+    width: 30px;
+    transform: translate(-5px, 25px) rotate(50deg);
+    border-radius: 10px;
+  }
+  to {
+    width: 48px;
+    height: 5px;
+    transform: translateY(20px) rotate(50deg);
+  }
+}
+@keyframes check2r {
+  from {
+    width: 40px;
+    transform: translate(11px, 15px) rotate(-50deg);
+    border-radius: 10px;
+  }
+  to {
+    width: 48px;
+    height: 5px;
+    transform: translateY(15px) rotate(-50deg);
+  }
+}

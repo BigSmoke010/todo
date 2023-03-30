@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Todo</title>
+  </head>
+  <body>
+    <div class="theme-switch-wrapper">
+      <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+    </div>
+    <div class="main">
+      <input class="inpt" type="text" placeholder="what do you want to do?" />
+      <input class="date-inpt" type="datetime-local" />
+      <button class="newbtn" id="sbmit">Submit</button>
+      <div class="sep"></div>
+    </div>
+
+    <div id="todolist" class="todos">
+      <!-- <div class="todo">
+        <div class="checkbox" id="check" state="unchecked">
+          <div class="line1"></div>
+          <div class="line2"></div>
+        </div>
+        <div class="todopar">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium,
+          sint.
+          <div class="date">2012-5-3 23:23PM</div>
+        </div>
+      </div> -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/colxi/getEventListeners/src/getEventListeners.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
