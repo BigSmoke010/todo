@@ -9,7 +9,7 @@ xhr.onload = function () {
   }
 };
 xhr.send();
-let checkbox = document.querySelectorAll('div[class="checkbox"]');
+let checkbox = document.getElementsByClassName("checkbox");
 const dateel = document.querySelector('input[type="datetime-local"]');
 const toggleSwitch = document.querySelector(
   '.theme-switch input[type="checkbox"]'
@@ -28,8 +28,10 @@ if (totaltodos === null) {
 }
 
 if (preffered_theme === "dark") {
+  switcher.classList.add("towhite");
   switcher.classList.add("circle");
 } else {
+  switcher.classList.add("toblack");
   switcher.classList.add("crescent");
 }
 
@@ -84,18 +86,16 @@ function render(x) {
   checklistener();
 }
 function checklistener() {
-  checkbox = document.querySelectorAll('div[class="checkbox"]');
+  checkbox = document.getElementsByClassName("checkbox");
   deletebox = document.querySelectorAll('div[class="trash"]');
   for (let i = 0; i < deletebox.length; i++) {
     if (deletebox[i].getEventListeners("click") == undefined) {
       deletebox[i].addEventListener("click", function () {
         let divsToDelete = document.querySelectorAll("div[class='todo']");
-        console.log(divsToDelete);
         for (let x = 0; x < divsToDelete.length; x++) {
           divsToDelete[x].remove();
         }
         totaltodos.splice(i, 1);
-        console.log(totaltodos);
         localStorage.setItem("all_todos", JSON.stringify(totaltodos));
         alltodos = totaltodos;
         render(alltodos);
@@ -105,7 +105,7 @@ function checklistener() {
   for (let i = 0; i < checkbox.length; i++) {
     if (checkbox[i].getEventListeners("click") == undefined) {
       checkbox[i].addEventListener("click", function () {
-        if (checkbox[i].state === "checked") {
+        if (checkbox[i].classList.contains("filledcheck")) {
           checkbox[i].classList.remove("filledcheck");
           checkbox[i].state = "unchecked";
           totaltodos[i] = [
@@ -113,7 +113,7 @@ function checklistener() {
             totaltodos[i][1],
             checkbox[i].state,
           ];
-          console.log(totaltodos[i]);
+          localStorage.setItem("all_todos", JSON.stringify(totaltodos));
           checkbox[i].children[0].classList.remove("animationclass1");
           checkbox[i].children[1].classList.remove("animationclass2");
           checkbox[i].children[0].classList.add("animationclass1r");
@@ -126,7 +126,6 @@ function checklistener() {
             totaltodos[i][1],
             checkbox[i].state,
           ];
-          console.log(totaltodos[i]);
           localStorage.setItem("all_todos", JSON.stringify(totaltodos));
           checkbox[i].children[0].classList.remove("animationclass1r");
           checkbox[i].children[1].classList.remove("animationclass2r");
@@ -140,8 +139,8 @@ function checklistener() {
 
 render(alltodos);
 submitbutton.addEventListener("click", function () {
-  totaltodos.push([inpt.value, dateel.value]);
-  alltodos.push([inpt.value, dateel.value]);
+  totaltodos.push([inpt.value, dateel.value, "unchecked"]);
+  alltodos.push([inpt.value, dateel.value, "unchecked"]);
   console.log(totaltodos);
   localStorage.setItem("all_todos", JSON.stringify(totaltodos));
   render(alltodos);

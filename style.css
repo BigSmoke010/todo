@@ -34,6 +34,7 @@ body {
   justify-content: center;
   gap: 10px;
   animation: fadein 1s forwards ease;
+  transition: background-color 1s;
 }
 
 .crescent {
