@@ -18,12 +18,12 @@ const inpt = document.querySelector('input[type="text"]');
 const submitbutton = document.getElementById("sbmit");
 const switcher = document.getElementById("themeswitch");
 const todols = document.getElementById("todolist");
-let alltodos = JSON.parse(localStorage.getItem("all_todos"));
-let totaltodos = JSON.parse(localStorage.getItem("all_todos"));
+let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
+let totaltodos = divsToBeAdded;
 let preffered_theme = localStorage.getItem("theme");
 document.documentElement.setAttribute("data-theme", preffered_theme);
 if (totaltodos === null) {
-  alltodos = [];
+  divsToBeAdded = [];
   totaltodos = [];
 }
 
@@ -82,7 +82,7 @@ function render(x) {
       /></div>
     `;
   }
-  alltodos = [];
+  divsToBeAdded = [];
   checklistener();
 }
 function checklistener() {
@@ -97,8 +97,8 @@ function checklistener() {
         }
         totaltodos.splice(i, 1);
         localStorage.setItem("all_todos", JSON.stringify(totaltodos));
-        alltodos = totaltodos;
-        render(alltodos);
+        divsToBeAdded = totaltodos;
+        render(divsToBeAdded);
       });
     }
   }
@@ -137,12 +137,12 @@ function checklistener() {
   }
 }
 
-render(alltodos);
+render(divsToBeAdded);
 submitbutton.addEventListener("click", function () {
   totaltodos.push([inpt.value, dateel.value, "unchecked"]);
-  alltodos.push([inpt.value, dateel.value, "unchecked"]);
+  divsToBeAdded.push([inpt.value, dateel.value, "unchecked"]);
   console.log(totaltodos);
   localStorage.setItem("all_todos", JSON.stringify(totaltodos));
-  render(alltodos);
+  render(divsToBeAdded);
 });
 switcher.addEventListener("click", switchTheme);
