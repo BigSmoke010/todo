@@ -19,6 +19,9 @@ const todols = document.getElementById("todolist");
 const inpt = document.querySelector('input[type="text"]');
 let alltodos = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = JSON.parse(localStorage.getItem("all_todos"));
+let preffered_theme = localStorage.getItem("theme");
+document.documentElement.setAttribute("data-theme", preffered_theme);
+
 if (totaltodos === null) {
   alltodos = [];
   totaltodos = [];
@@ -27,12 +30,17 @@ if (totaltodos === null) {
 const toggleSwitch = document.querySelector(
   '.theme-switch input[type="checkbox"]'
 );
-
+if (preffered_theme === "dark") {
+  toggleSwitch.checked = true;
+}
 function switchTheme(e) {
+  console.log(e);
   if (e.target.checked) {
     document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark");
   } else {
     document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light");
   }
 }
 
@@ -60,7 +68,7 @@ function render(x) {
           <div class="date">${x[i][1].replace("T", " ")}</div>
         </div>
         <div class="trash" id="delete"> <img
-        src="https://pic.onlinewebfonts.com/svg/img_512185.png"
+        src="trash.png"
         alt=""
         width="50"
       /></div>
@@ -75,10 +83,10 @@ function checklistener() {
   for (let i = 0; i < deletebox.length; i++) {
     if (deletebox[i].getEventListeners("click") == undefined) {
       deletebox[i].addEventListener("click", function () {
-        let divsToDelete = document.querySelectorAll("div[class='todo']"); // Select all divs that contain the paragraph
+        let divsToDelete = document.querySelectorAll("div[class='todo']");
         console.log(divsToDelete);
         for (let x = 0; x < divsToDelete.length; x++) {
-          divsToDelete[x].remove(); // Remove the div if it contains the paragraph
+          divsToDelete[x].remove();
         }
         totaltodos.splice(i, 1);
         console.log(totaltodos);
