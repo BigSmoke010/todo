@@ -1,50 +1,51 @@
-const dateel = document.querySelector('input[type="datetime-local"]');
-let today = new Date();
-let dd = String(today.getDate()).padStart(2, "0");
-let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-let yyyy = today.getFullYear();
-let hours = String(today.getHours());
-let minutes = String(today.getMinutes());
-if (minutes.length === 1) {
-  minutes = "0" + minutes;
-}
-if (hours.length === 1) {
-  hours = "0" + hours;
-}
-dateel.value = yyyy + "-" + mm + "-" + dd + "T" + hours + ":" + minutes;
-
+const greetel = document.getElementById("greeter");
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "greetings.json", true);
+xhr.onload = function () {
+  if (this.status === 200) {
+    var data = JSON.parse(this.responseText);
+    greetel.textContent =
+      data[Math.floor(Math.random() * (data.length - 0) + 0)];
+  }
+};
+xhr.send();
 let checkbox = document.querySelectorAll('div[class="checkbox"]');
-const submitbutton = document.getElementById("sbmit");
-const todols = document.getElementById("todolist");
+const dateel = document.querySelector('input[type="datetime-local"]');
+const toggleSwitch = document.querySelector(
+  '.theme-switch input[type="checkbox"]'
+);
 const inpt = document.querySelector('input[type="text"]');
+const submitbutton = document.getElementById("sbmit");
+const switcher = document.getElementById("themeswitch");
+const todols = document.getElementById("todolist");
 let alltodos = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = JSON.parse(localStorage.getItem("all_todos"));
 let preffered_theme = localStorage.getItem("theme");
 document.documentElement.setAttribute("data-theme", preffered_theme);
-
 if (totaltodos === null) {
   alltodos = [];
   totaltodos = [];
 }
 
-const toggleSwitch = document.querySelector(
-  '.theme-switch input[type="checkbox"]'
-);
 if (preffered_theme === "dark") {
-  toggleSwitch.checked = true;
+  switcher.classList.add("circle");
+} else {
+  switcher.classList.add("crescent");
 }
+
 function switchTheme(e) {
-  console.log(e);
-  if (e.target.checked) {
+  if (e.target.classList.contains("toblack")) {
+    switcher.classList.remove("toblack");
+    switcher.classList.add("towhite");
     document.documentElement.setAttribute("data-theme", "dark");
     localStorage.setItem("theme", "dark");
   } else {
+    switcher.classList.remove("towhite");
+    switcher.classList.add("toblack");
     document.documentElement.setAttribute("data-theme", "light");
     localStorage.setItem("theme", "light");
   }
 }
-
-toggleSwitch.addEventListener("change", switchTheme, false);
 
 function render(x) {
   for (let i = 0; i < x.length; i++) {
@@ -57,7 +58,12 @@ function render(x) {
     line2.classList.add("line2");
     check.classList.add("checkbox");
     check.id = "check";
-    check.state = "unchecked";
+    check.state = x[i][2];
+    if (check.state === "checked") {
+      check.classList.add("filledcheck");
+      line1.classList.add("animationclass1");
+      line2.classList.add("animationclass2");
+    }
     check.appendChild(line1);
     check.appendChild(line2);
     todo.appendChild(check);
@@ -102,6 +108,12 @@ function checklistener() {
         if (checkbox[i].state === "checked") {
           checkbox[i].classList.remove("filledcheck");
           checkbox[i].state = "unchecked";
+          totaltodos[i] = [
+            totaltodos[i][0],
+            totaltodos[i][1],
+            checkbox[i].state,
+          ];
+          console.log(totaltodos[i]);
           checkbox[i].children[0].classList.remove("animationclass1");
           checkbox[i].children[1].classList.remove("animationclass2");
           checkbox[i].children[0].classList.add("animationclass1r");
@@ -109,6 +121,13 @@ function checklistener() {
         } else {
           checkbox[i].classList.add("filledcheck");
           checkbox[i].state = "checked";
+          totaltodos[i] = [
+            totaltodos[i][0],
+            totaltodos[i][1],
+            checkbox[i].state,
+          ];
+          console.log(totaltodos[i]);
+          localStorage.setItem("all_todos", JSON.stringify(totaltodos));
           checkbox[i].children[0].classList.remove("animationclass1r");
           checkbox[i].children[1].classList.remove("animationclass2r");
           checkbox[i].children[0].classList.add("animationclass1");
@@ -127,3 +146,4 @@ submitbutton.addEventListener("click", function () {
   localStorage.setItem("all_todos", JSON.stringify(totaltodos));
   render(alltodos);
 });
+switcher.addEventListener("click", switchTheme);
