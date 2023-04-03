@@ -161,13 +161,21 @@ body {
   flex-flow: column nowrap;
   gap: 10px;
 }
-.todopar {
+.parwrapper {
   flex-grow: 1;
   font-size: 20px;
   color: var(--FONTC);
+  display: flex;
+  flex-flow: column nowrap;
+}
+.paragraphwrapper {
+  margin-right: auto;
+  position: relative;
 }
 .date {
+  margin-right: auto;
   font-size: 12px;
+  height: 12px;
   color: var(--FONTC);
 }
 .trash {
@@ -213,6 +221,14 @@ body {
   height: 5px;
   transform: translateY(15px) rotate(-50deg);
   transition: all 1s;
+}
+.checkline {
+  background-color: var(--FONTC);
+  height: 5px;
+  position: absolute;
+  top: 50%;
+  border-radius: 5px;
+  animation: check 3s forwards ease;
 }
 .animationclass1 {
   animation: check1 1s forwards ease;
@@ -301,5 +317,13 @@ body {
   to {
     transform: rotate(180deg);
     box-shadow: inset 10px 0px 0px var(--FONTC);
+  }
+}
+@keyframes check {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
   }
 }
