@@ -81,7 +81,6 @@ function render(x) {
       dateEl.style = "background-color: red;";
     }
     if (diffInMs <= 0) {
-      console.log("I MISS");
       dateEl.style = "background-color: grey;";
     }
     todo.classList.add("todo");
@@ -94,6 +93,7 @@ function render(x) {
       const completedcheck = document.createElement("div");
       completedcheck.classList.add("checkline");
       paragraph.appendChild(completedcheck);
+      paragraph.classList.add("greyedout");
       check.classList.add("filledcheck");
       line1.classList.add("animationclass1");
       line2.classList.add("animationclass2");
@@ -141,6 +141,8 @@ function checklistener() {
           checkbox[i].classList.remove("filledcheck");
           let checkparent = checkbox[i].parentNode.children[1].children[0];
           checkparent.removeChild(checkparent.lastChild);
+
+          checkparent.classList.remove("greyedout");
           checkbox[i].state = "unchecked";
           totaltodos[i] = [
             totaltodos[i][0],
@@ -158,6 +160,7 @@ function checklistener() {
           const completedcheck = document.createElement("div");
           completedcheck.classList.add("checkline");
           checkparent.appendChild(completedcheck);
+          checkparent.classList.add("greyedout");
           checkbox[i].state = "checked";
           totaltodos[i] = [
             totaltodos[i][0],

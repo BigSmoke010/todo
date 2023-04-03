@@ -168,9 +168,13 @@ body {
   display: flex;
   flex-flow: column nowrap;
 }
+.greyedout {
+  color: rgba(128, 128, 128, 0.459);
+}
 .paragraphwrapper {
   margin-right: auto;
   position: relative;
+  transition: color 1.5s;
 }
 .date {
   margin-right: auto;
@@ -224,7 +228,7 @@ body {
 }
 .checkline {
   background-color: var(--FONTC);
-  height: 5px;
+  height: 3px;
   position: absolute;
   top: 50%;
   border-radius: 5px;
