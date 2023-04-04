@@ -11,7 +11,6 @@ const todols = document.getElementById("todolist");
 let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = divsToBeAdded;
 let preffered_theme = localStorage.getItem("theme");
-
 document.documentElement.setAttribute("data-theme", preffered_theme);
 if (totaltodos === null) {
   divsToBeAdded = [];
@@ -95,8 +94,8 @@ function render(x) {
       paragraph.appendChild(completedcheck);
       paragraph.classList.add("greyedout");
       check.classList.add("filledcheck");
-      line1.classList.add("animationclass1");
-      line2.classList.add("animationclass2");
+      line1.style.animation = "check1 1s forwards ease";
+      line2.style.animation = "check2 1s forwards ease";
     }
     check.appendChild(line1);
     check.appendChild(line2);
@@ -140,7 +139,7 @@ function checklistener() {
         if (checkbox[i].classList.contains("filledcheck")) {
           checkbox[i].classList.remove("filledcheck");
           let checkparent = checkbox[i].parentNode.children[1].children[0];
-          checkparent.removeChild(checkparent.lastChild);
+          checkparent.lastChild.style = "transition: all 1s; opacity: 0;";
 
           checkparent.classList.remove("greyedout");
           checkbox[i].state = "unchecked";
@@ -150,10 +149,8 @@ function checklistener() {
             checkbox[i].state,
           ];
           localStorage.setItem("all_todos", JSON.stringify(totaltodos));
-          checkbox[i].children[0].classList.remove("animationclass1");
-          checkbox[i].children[1].classList.remove("animationclass2");
-          checkbox[i].children[0].classList.add("animationclass1r");
-          checkbox[i].children[1].classList.add("animationclass2r");
+          checkbox[i].children[0].style.animation = "check1r 1s forwards ease";
+          checkbox[i].children[1].style.animation = "check2r 1s forwards ease";
         } else {
           checkbox[i].classList.add("filledcheck");
           let checkparent = checkbox[i].parentNode.children[1].children[0];
@@ -168,10 +165,8 @@ function checklistener() {
             checkbox[i].state,
           ];
           localStorage.setItem("all_todos", JSON.stringify(totaltodos));
-          checkbox[i].children[0].classList.remove("animationclass1r");
-          checkbox[i].children[1].classList.remove("animationclass2r");
-          checkbox[i].children[0].classList.add("animationclass1");
-          checkbox[i].children[1].classList.add("animationclass2");
+          checkbox[i].children[0].style.animation = "check1 1s forwards ease";
+          checkbox[i].children[1].style.animation = "check2 1s forwards ease";
         }
       });
     }

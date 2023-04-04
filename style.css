@@ -234,18 +234,6 @@ body {
   border-radius: 5px;
   animation: check 3s forwards ease;
 }
-.animationclass1 {
-  animation: check1 1s forwards ease;
-}
-.animationclass2 {
-  animation: check2 1s forwards ease;
-}
-.animationclass1r {
-  animation: check1r 1s forwards ease;
-}
-.animationclass2r {
-  animation: check2r 1s forwards ease;
-}
 @keyframes check1 {
   from {
     width: 48px;
