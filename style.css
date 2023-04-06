@@ -148,8 +148,6 @@ body {
 
 .todo {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
   width: 97vw;
   border: 1px solid var(--FONTC);
@@ -157,6 +155,15 @@ body {
   padding: 10px;
 }
 .todos {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+.nothingness {
+  color: rgba(95, 90, 90, 0.555);
+  font-size: 30px;
+}
+.comptodos {
   display: flex;
   flex-flow: column nowrap;
   gap: 10px;
@@ -172,12 +179,10 @@ body {
   color: rgba(128, 128, 128, 0.486);
 }
 .paragraphwrapper {
-  margin-right: auto;
   position: relative;
   transition: color 1.5s;
 }
 .date {
-  margin-right: auto;
   font-size: 12px;
   height: 12px;
   color: var(--FONTC);

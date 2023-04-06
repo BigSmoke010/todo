@@ -8,15 +8,18 @@ const inpt = document.querySelector('input[type="text"]');
 const submitbutton = document.getElementById("sbmit");
 const switcher = document.getElementById("themeswitch");
 const todols = document.getElementById("todolist");
+const nonetodo = document.createElement("div");
 let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = divsToBeAdded;
 let preffered_theme = localStorage.getItem("theme");
 document.documentElement.setAttribute("data-theme", preffered_theme);
-if (totaltodos === null) {
+if (totaltodos === undefined || totaltodos.length == 0) {
+  nonetodo.textContent = "You have Nothing todo!";
+  nonetodo.classList.add("nothingness");
+  todols.appendChild(nonetodo);
   divsToBeAdded = [];
   totaltodos = [];
 }
-
 if (preffered_theme === "dark") {
   switcher.classList.add("towhite");
   switcher.classList.add("circle");
@@ -67,6 +70,7 @@ function render(x) {
     wrapper.classList.add("parwrapper");
     paragraph.textContent = x[i][0];
     dateEl.textContent = x[i][1].replace("T", " ");
+
     if (diffInDays === 0) {
       dateEl.style = "background-color: yellow;";
     }
@@ -127,6 +131,11 @@ function checklistener() {
         totaltodos.splice(i, 1);
         localStorage.setItem("all_todos", JSON.stringify(totaltodos));
         divsToBeAdded = totaltodos;
+        if (totaltodos === undefined || totaltodos.length == 0) {
+          nonetodo.textContent = "You have Nothing todo!";
+          nonetodo.classList.add("nothingness");
+          todols.appendChild(nonetodo);
+        }
         render(divsToBeAdded);
       });
     }
@@ -189,6 +198,7 @@ submitbutton.addEventListener("click", function () {
     inpt.value = "";
     localStorage.setItem("all_todos", JSON.stringify(totaltodos));
     render(divsToBeAdded);
+    todols.removeChild(nonetodo);
   }
 });
 switcher.addEventListener("click", switchTheme);
