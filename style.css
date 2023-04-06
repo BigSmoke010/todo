@@ -169,7 +169,7 @@ body {
   flex-flow: column nowrap;
 }
 .greyedout {
-  color: rgba(128, 128, 128, 0.459);
+  color: rgba(128, 128, 128, 0.486);
 }
 .paragraphwrapper {
   margin-right: auto;
@@ -226,14 +226,32 @@ body {
   transform: translateY(15px) rotate(-50deg);
   transition: all 1s;
 }
-.checkline {
-  background-color: var(--FONTC);
-  height: 3px;
-  position: absolute;
-  top: 50%;
-  border-radius: 5px;
-  animation: check 3s forwards ease;
+.strike {
+  text-decoration: line-through;
+  animation: strike 1s forwards linear;
 }
+.unstrike {
+  text-decoration: line-through;
+  animation: striker 1s forwards linear;
+  text-decoration-color: var(--FONTC);
+}
+@keyframes strike {
+  from {
+    text-decoration-color: transparent;
+  }
+  to {
+    text-decoration-color: var(--FONTC);
+  }
+}
+@keyframes striker {
+  from {
+    text-decoration-color: var(--FONTC);
+  }
+  to {
+    text-decoration-color: transparent;
+  }
+}
+
 @keyframes check1 {
   from {
     width: 48px;
@@ -309,13 +327,5 @@ body {
   to {
     transform: rotate(180deg);
     box-shadow: inset 10px 0px 0px var(--FONTC);
-  }
-}
-@keyframes check {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 100%;
   }
 }

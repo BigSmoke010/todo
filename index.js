@@ -89,9 +89,7 @@ function render(x) {
     check.id = "check";
     check.state = x[i][2];
     if (check.state === "checked") {
-      const completedcheck = document.createElement("div");
-      completedcheck.classList.add("checkline");
-      paragraph.appendChild(completedcheck);
+      paragraph.classList.add("strike");
       paragraph.classList.add("greyedout");
       check.classList.add("filledcheck");
       line1.style.animation = "check1 1s forwards ease";
@@ -140,7 +138,8 @@ function checklistener() {
           checkbox[i].classList.remove("filledcheck");
           let checkparent = checkbox[i].parentNode.children[1].children[0];
           checkparent.lastChild.style = "transition: all 1s; opacity: 0;";
-
+          checkparent.classList.remove("strike");
+          checkparent.classList.add("unstrike");
           checkparent.classList.remove("greyedout");
           checkbox[i].state = "unchecked";
           totaltodos[i] = [
@@ -156,7 +155,8 @@ function checklistener() {
           let checkparent = checkbox[i].parentNode.children[1].children[0];
           const completedcheck = document.createElement("div");
           completedcheck.classList.add("checkline");
-          checkparent.appendChild(completedcheck);
+          checkparent.classList.remove("unstrike");
+          checkparent.classList.add("strike");
           checkparent.classList.add("greyedout");
           checkbox[i].state = "checked";
           totaltodos[i] = [
