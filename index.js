@@ -7,6 +7,9 @@ const timeel = document.querySelector('input[type="time"]');
 const inpt = document.querySelector('input[type="text"]');
 const submitbutton = document.getElementById("sbmit");
 const switcher = document.getElementById("themeswitch");
+const colorpicker = document.getElementById("colorpicked");
+const colorchoose = document.getElementById("checkcolor");
+
 const todols = document.getElementById("todolist");
 const nonetodo = document.createElement("div");
 let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
@@ -86,6 +89,8 @@ function render(x) {
     if (diffInMs <= 0) {
       dateEl.style = "background-color: grey;";
     }
+    todo.style =
+      "background-color: " + x[i][3] + ";transition: background-color 1s;";
     todo.classList.add("todo");
     line1.classList.add("line1");
     line2.classList.add("line2");
@@ -96,6 +101,7 @@ function render(x) {
       paragraph.classList.add("strike");
       paragraph.classList.add("greyedout");
       check.classList.add("filledcheck");
+      todo.style = "background-color: #45414150;";
       line1.style.animation = "check1 1s forwards ease";
       line2.style.animation = "check2 1s forwards ease";
     }
@@ -105,6 +111,7 @@ function render(x) {
 
     wrapper.append(paragraph);
     todols.append(todo);
+
     todo.append(wrapper);
     wrapper.append(dateEl);
     todo.innerHTML += `
@@ -154,25 +161,31 @@ function checklistener() {
           totaltodos[i] = [
             totaltodos[i][0],
             totaltodos[i][1],
-            checkbox[i].state,
+            "unchecked",
+            totaltodos[i][3],
           ];
+          checkbox[i].parentNode.style =
+            "background-color:" + totaltodos[i][3] + " ;";
           localStorage.setItem("all_todos", JSON.stringify(totaltodos));
           checkbox[i].children[0].style.animation = "check1r 1s forwards ease";
           checkbox[i].children[1].style.animation = "check2r 1s forwards ease";
         } else {
           checkbox[i].classList.add("filledcheck");
           let checkparent = checkbox[i].parentNode.children[1].children[0];
+          totaltodos[i] = [
+            totaltodos[i][0],
+            totaltodos[i][1],
+            "checked",
+            totaltodos[i][3],
+          ];
+          checkbox[i].parentNode.style = "background-color: #80808080;";
           const completedcheck = document.createElement("div");
           completedcheck.classList.add("checkline");
           checkparent.classList.remove("unstrike");
           checkparent.classList.add("strike");
           checkparent.classList.add("greyedout");
           checkbox[i].state = "checked";
-          totaltodos[i] = [
-            totaltodos[i][0],
-            totaltodos[i][1],
-            checkbox[i].state,
-          ];
+
           localStorage.setItem("all_todos", JSON.stringify(totaltodos));
           checkbox[i].children[0].style.animation = "check1 1s forwards ease";
           checkbox[i].children[1].style.animation = "check2 1s forwards ease";
@@ -184,21 +197,31 @@ function checklistener() {
 
 render(divsToBeAdded);
 submitbutton.addEventListener("click", function () {
+  console.log(colorchoose.checked);
+  let pickedcolor = colorpicker.value;
+  console.log(pickedcolor);
+  if (colorchoose.checked === false) {
+    pickedcolor = "none";
+  }
   if (inpt.value) {
     totaltodos.push([
       inpt.value,
       dateel.value + " " + timeel.value,
       "unchecked",
+      pickedcolor,
     ]);
     divsToBeAdded.push([
       inpt.value,
       dateel.value + " " + timeel.value,
       "unchecked",
+      pickedcolor,
     ]);
     inpt.value = "";
     localStorage.setItem("all_todos", JSON.stringify(totaltodos));
     render(divsToBeAdded);
-    todols.removeChild(nonetodo);
+    try {
+      todols.removeChild(nonetodo);
+    } catch (error) {}
   }
 });
 switcher.addEventListener("click", switchTheme);

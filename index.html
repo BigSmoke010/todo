@@ -17,16 +17,24 @@
       <div id="themeswitch"></div>
     </div>
     <em id="greeter" class="greeting"></em>
+
     <div class="main">
       <input class="inpt" type="text" placeholder="what do you want to do?" />
       <input class="date-inpt" type="date" />
       <input type="time" class="time-inpt" id="appt" name="appt" />
+
+      <div class="colorwrapper">
+        <input type="checkbox" id="checkcolor" />
+
+        <input type="color" id="colorpicked" />
+      </div>
       <button class="newbtn" id="sbmit">Submit</button>
+
       <div class="sep"></div>
     </div>
 
     <div id="todolist" class="todos"></div>
-    <div id="completedtodos" class="comptodos"></div>
+
     <script type="text/javascript" src="greetings.json"></script>
     <script src="https://cdn.jsdelivr.net/gh/colxi/getEventListeners/src/getEventListeners.min.js"></script>
     <script src="index.js"></script>
