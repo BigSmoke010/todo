@@ -222,6 +222,8 @@ submitbutton.addEventListener("click", function () {
     try {
       todols.removeChild(nonetodo);
     } catch (error) {}
+  } else {
+    inpt.focus();
   }
 });
 switcher.addEventListener("click", switchTheme);
