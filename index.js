@@ -116,7 +116,7 @@ function render(x) {
     wrapper.append(dateEl);
     todo.innerHTML += `
         <div class="trash" id="delete"> <img
-        src="trash.png"
+        src="trash.svg"
         alt=""
         width="50"
       /></div>
