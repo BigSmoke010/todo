@@ -16,7 +16,7 @@ let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = divsToBeAdded;
 let preffered_theme = localStorage.getItem("theme");
 document.documentElement.setAttribute("data-theme", preffered_theme);
-if (totaltodos === undefined || totaltodos.length == 0) {
+if (totaltodos === undefined) {
   nonetodo.textContent = "You have Nothing todo!";
   nonetodo.classList.add("nothingness");
   todols.appendChild(nonetodo);
