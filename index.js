@@ -194,8 +194,8 @@ function checklistener() {
     }
   }
 }
-
-render(divsToBeAdded);
+if (divsToBeAdded !== null ){
+render(divsToBeAdded);}
 submitbutton.addEventListener("click", function () {
   console.log(colorchoose.checked);
   let pickedcolor = colorpicker.value;
