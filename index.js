@@ -16,12 +16,13 @@ let divsToBeAdded = JSON.parse(localStorage.getItem("all_todos"));
 let totaltodos = divsToBeAdded;
 let preffered_theme = localStorage.getItem("theme");
 document.documentElement.setAttribute("data-theme", preffered_theme);
-if (totaltodos === undefined) {
+if (totaltodos === undefined || totaltodos === null) {
   nonetodo.textContent = "You have Nothing todo!";
   nonetodo.classList.add("nothingness");
   todols.appendChild(nonetodo);
   divsToBeAdded = [];
   totaltodos = [];
+  console.log(totaltodos)
 }
 if (preffered_theme === "dark") {
   switcher.classList.add("towhite");
@@ -194,8 +195,7 @@ function checklistener() {
     }
   }
 }
-if (divsToBeAdded !== null ){
-render(divsToBeAdded);}
+render(divsToBeAdded);
 submitbutton.addEventListener("click", function () {
   console.log(colorchoose.checked);
   let pickedcolor = colorpicker.value;
